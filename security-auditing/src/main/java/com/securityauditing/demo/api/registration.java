@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.management.relation.Role;
+import java.util.HashSet;
 import java.util.Set;
 
 @RestController
@@ -27,7 +29,7 @@ public class registration {
     public UserEntity register(@RequestBody UserDto userDto) {
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         Set<String> strRoles = userDto.getRoles();
-        Set<RoleEntity>
+        Set<RoleEntity> roles = new HashSet<RoleEntity>();
         if (strRoles == null) {
 
         } else {

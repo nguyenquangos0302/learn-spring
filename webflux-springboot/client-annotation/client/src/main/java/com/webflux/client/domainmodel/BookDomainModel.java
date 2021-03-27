@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookDomainModel {
-	
-	private Long id;
-	
-	private String name;
-	
-	private String field;
+
+    private Long id;
+
+    private String name;
+
+    private String field;
 
 }

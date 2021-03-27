@@ -17,35 +17,35 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("/api/v1/book")
 public class BookApi {
-	
-	WebClient webClient;
-	
-	public BookApi() {
-		// TODO Auto-generated constructor stub
-		this.webClient = WebClient
-						.builder()
-						.baseUrl("http://localhost:8081")
-						.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-						.build();
-	}
-	
-	@GetMapping("")
-	public Flux<BookDomainModel> getListBook() {
-		return webClient
-				   .get()
-				   .uri("/server/api/v1/book")
-				   .retrieve()
-				   .bodyToFlux(BookDomainModel.class);
-	}
-	
-	@PostMapping("")
-	public Mono<BookDomainModel> save(@RequestBody BookDomainModel book) {
-		return webClient
-				   .post()
-				   .uri("/server/api/v1/book")
-				   .bodyValue(book)
-				   .retrieve()
-				   .bodyToMono(BookDomainModel.class);
-	}
-	
+
+    WebClient webClient;
+
+    public BookApi() {
+        // TODO Auto-generated constructor stub
+        this.webClient = WebClient
+                .builder()
+                .baseUrl("http://localhost:8081")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .build();
+    }
+
+    @GetMapping("")
+    public Flux<BookDomainModel> getListBook() {
+        return webClient
+                .get()
+                .uri("/server/api/v1/book")
+                .retrieve()
+                .bodyToFlux(BookDomainModel.class);
+    }
+
+    @PostMapping("")
+    public Mono<BookDomainModel> save(@RequestBody BookDomainModel book) {
+        return webClient
+                .post()
+                .uri("/server/api/v1/book")
+                .bodyValue(book)
+                .retrieve()
+                .bodyToMono(BookDomainModel.class);
+    }
+
 }

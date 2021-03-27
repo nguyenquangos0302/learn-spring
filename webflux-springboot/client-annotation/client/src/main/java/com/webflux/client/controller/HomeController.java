@@ -11,10 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 public class HomeController {
 
-	@GetMapping("")
-	public ModelAndView home() {
-		ModelAndView mav = new ModelAndView("web/home");
-		return mav;
-	}
-	
+    @GetMapping("")
+    public ModelAndView home() {
+        ModelAndView mav = new ModelAndView("web/home");
+        return mav;
+    }
+
 }

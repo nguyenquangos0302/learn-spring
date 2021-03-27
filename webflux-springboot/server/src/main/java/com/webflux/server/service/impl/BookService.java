@@ -23,10 +23,10 @@ public class BookService implements IBookService {
     @Override
     public List<BookModel> findAll() {
         List<BookModel> lists = bookRepository.findAll()
-                                .stream()
-                                //.map(this::convertToDtoOrModel)
-                                .map(book -> new BookConvert().convertToDtoOrModel(book))
-                                .collect(Collectors.toList());
+                .stream()
+                //.map(this::convertToDtoOrModel)
+                .map(book -> new BookConvert().convertToDtoOrModel(book))
+                .collect(Collectors.toList());
         return lists;
     }
 
