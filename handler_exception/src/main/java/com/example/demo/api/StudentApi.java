@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,8 +31,24 @@ public class StudentApi {
             return new ResponseEntity<List<StudentModel>>(list, HttpStatus.OK);
         } catch (ApiRequestException e) {
             throw new ApiRequestException("Not found list student");
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        catch (Exception e) {
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<StudentModel>> findStudentById(@PathVariable int id) {
+        try {
+            StudentModel studentModel = new StudentModel();
+            studentModel.setId(id);
+            List<StudentModel> list = studentService.findStudentById(studentModel);
+            if (list.size() == 0) {
+                throw new ApiRequestException("Not found student with " + id);
+            }
+            return new ResponseEntity<List<StudentModel>>(list, HttpStatus.OK);
+        } catch (ApiRequestException e) {
+            throw new ApiRequestException("Not found student with " + id);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
