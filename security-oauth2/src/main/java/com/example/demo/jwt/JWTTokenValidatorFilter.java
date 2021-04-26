@@ -29,10 +29,10 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
                 SecretKey key = Keys.hmacShaKeyFor(SecurityConstant.JWT_KEY.getBytes(StandardCharsets.UTF_8));
 
                 Claims claims = Jwts.parserBuilder()
-                                    .setSigningKey(key)
-                                    .build()
-                                    .parseClaimsJws(jwt)
-                                    .getBody();
+                        .setSigningKey(key)
+                        .build()
+                        .parseClaimsJws(jwt)
+                        .getBody();
 
                 String username = String.valueOf(claims.get("username"));
                 String authorities = (String) claims.get("authorities");

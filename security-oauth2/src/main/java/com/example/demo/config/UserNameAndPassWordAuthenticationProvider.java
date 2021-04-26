@@ -37,7 +37,7 @@ public class UserNameAndPassWordAuthenticationProvider implements Authentication
         String username = authentication.getName();
         String pwd = authentication.getCredentials().toString();
         Optional<CustomerEntity> customer = customerRepository.findByEmail(username);
-        if(customer.isPresent()) {
+        if (customer.isPresent()) {
             if (passwordEncoder.matches(pwd, customer.get().getPwd())) {
                 List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
                 authorities = getGrantedAuthorities(customer.get().getRole());

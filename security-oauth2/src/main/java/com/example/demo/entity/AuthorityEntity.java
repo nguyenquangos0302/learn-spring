@@ -16,7 +16,8 @@ public class AuthorityEntity {
     @JoinColumn(name = "custome_id")
     private CustomerEntity customer;
 
-    public AuthorityEntity() {}
+    public AuthorityEntity() {
+    }
 
     public AuthorityEntity(String name, CustomerEntity custome) {
         this.name = name;

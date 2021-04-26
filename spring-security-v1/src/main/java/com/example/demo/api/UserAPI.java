@@ -22,9 +22,8 @@ public class UserAPI {
     private final IUserRepository userRepository;
 
     @PostMapping("/registration")
-    public ResponseEntity<?> registrationUser(@Valid @RequestBody RegistrationRequest registrationRequest) {
-        //return userRepository.save(user);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public User registrationUser(@Valid @RequestBody User user) {
+        return userRepository.save(user);
     }
 
 //    @GetMapping("/list")

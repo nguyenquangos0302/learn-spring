@@ -13,7 +13,7 @@ import java.time.ZonedDateTime;
 @ControllerAdvice
 public class ApiExceptionHandler {
 
-    @ExceptionHandler(value = { MethodArgumentNotValidException.class })
+    @ExceptionHandler(value = {MethodArgumentNotValidException.class})
     public ResponseEntity<Object> handlerApiRequestException(MethodArgumentNotValidException e) {
         // 1. Create payload containing exception details
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;

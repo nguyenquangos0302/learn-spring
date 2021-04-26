@@ -10,15 +10,15 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table( name = "role",
+@Table(name = "role",
         uniqueConstraints = {
-        @UniqueConstraint(columnNames = "name")
-})
+                @UniqueConstraint(columnNames = "name")
+        })
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role extends Abstract {
+public class Role extends Basic {
 
     @Enumerated(EnumType.STRING)
     private ERole name;

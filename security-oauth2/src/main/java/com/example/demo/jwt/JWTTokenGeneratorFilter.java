@@ -27,11 +27,11 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
         if (authentication != null) {
             SecretKey key = Keys.hmacShaKeyFor(SecurityConstant.JWT_KEY.getBytes(StandardCharsets.UTF_8));
             String jwt = Jwts.builder().setIssuer("Eazy Bank").setSubject("JWT Token")
-                            .claim("username", authentication.getName())
-                            .claim("authorities", populateAuthorities(authentication.getAuthorities()))
-                            .setIssuedAt(new Date())
-                            .setExpiration(new Date((new Date()).getTime() + 30000))
-                            .signWith(key).compact();
+                    .claim("username", authentication.getName())
+                    .claim("authorities", populateAuthorities(authentication.getAuthorities()))
+                    .setIssuedAt(new Date())
+                    .setExpiration(new Date((new Date()).getTime() + 30000))
+                    .signWith(key).compact();
             response.setHeader(SecurityConstant.JWT_HEADER, jwt);
         }
         filterChain.doFilter(request, response);

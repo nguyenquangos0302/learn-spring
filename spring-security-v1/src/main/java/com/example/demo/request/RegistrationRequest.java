@@ -21,14 +21,14 @@ public class RegistrationRequest {
     private String name;
 
     @NotBlank(message = "Please provider a username")
-    @Size(min = 5, max = 20, message = "Name length must be from 5 to 20 characters")
+    @Size(min = 5, max = 20, message = "UserName length must be from 5 to 20 characters")
     private String username;
 
     @NotBlank(message = "Please provider a password")
     private String password;
 
     @NotBlank(message = "Please provider a email")
-    @Size(min = 5, max = 20, message = "Name length must be from 5 to 20 characters")
+    @Size(min = 5, max = 20, message = "Email length must be from 5 to 20 characters")
     @Email(message = "Email should be valid")
     private String email;
 }

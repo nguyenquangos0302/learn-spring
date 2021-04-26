@@ -22,7 +22,10 @@ public class CustomerEntity {
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private Set<AuthorityEntity> role;
 
-    public CustomerEntity() {};
+    public CustomerEntity() {
+    }
+
+    ;
 
     public CustomerEntity(String email, String pwd, Set<AuthorityEntity> role) {
         this.email = email;
