@@ -19,14 +19,18 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User extends Basic {
+public class User extends Base {
 
+    @Column(name="name", nullable = false)
     private String name;
 
+    @Column(name="username", nullable = false)
     private String username;
 
+    @Column(name="password", nullable = false)
     private String password;
 
+    @Column(name="email", nullable = false)
     private String email;
 
     @ManyToMany(fetch = FetchType.LAZY)

@@ -1,35 +1,31 @@
 package com.example.demo.api;
 
-import com.example.demo.entity.User;
-import com.example.demo.repository.IUserRepository;
-import com.example.demo.request.RegistrationRequest;
+import com.example.demo.payload.request.user.RegistrationRequest;
+import com.example.demo.payload.response.user.RegistrationResponse;
 import com.example.demo.service.IUserService;
 import lombok.AllArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-
 @RestController
 @RequestMapping("/api/v1/user")
 @AllArgsConstructor
 public class UserAPI {
 
-    private final IUserService userService;
+    private static final Logger LOGGER = LogManager.getLogger(UserAPI.class);
 
-    private final IUserRepository userRepository;
+    private IUserService userService;
 
     @PostMapping("/registration")
-    public User registrationUser(@Valid @RequestBody User user) {
-        return userRepository.save(user);
+    public ResponseEntity<RegistrationResponse> registrationUser(@Valid @RequestBody RegistrationRequest registrationRequest) {
+        LOGGER.info("[registrationUser] --> execute");
+        RegistrationResponse registrationResponse = userService.save(registrationRequest);
+        return new ResponseEntity<RegistrationResponse>(registrationResponse, HttpStatus.OK);
     }
-
-//    @GetMapping("/list")
-//    public List<User> listUser() {
-//        return userRepository.findAll()
-//    }
-
 
 }

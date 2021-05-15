@@ -16,7 +16,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 .antMatchers("/api/v1/user/registration").permitAll()
-                .antMatchers("/api/v1/user/list").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

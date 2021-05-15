@@ -18,7 +18,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role extends Basic {
+public class Role extends Base {
 
     @Enumerated(EnumType.STRING)
     private ERole name;

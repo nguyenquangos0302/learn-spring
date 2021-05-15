@@ -1,4 +1,4 @@
-package com.example.demo.response;
+package com.example.demo.payload.response.role;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,14 +11,10 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ListUserResponse {
+public class RoleResponse {
 
     private UUID id;
 
     private String name;
-
-    private String userName;
-
-    private String email;
 
 }

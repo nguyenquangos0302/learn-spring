@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.tomcat.jni.Local;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.springframework.boot.context.properties.bind.DefaultValue;
@@ -20,7 +21,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class Basic implements Serializable {
+public abstract class Base implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -29,10 +30,10 @@ public abstract class Basic implements Serializable {
     private String id;
 
     @Column(name = "createddate", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable = false)
-    private Date createdDate;
+    private LocalDateTime createdDate;
 
     @Column(name = "modifieddate", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable = false)
-    private Date modifiedDate;
+    private LocalDateTime modifiedDate;
 
     @Column(name = "createdby", columnDefinition = "VARCHAR(255) DEFAULT 'system'", nullable = false)
     private String createdBy;
@@ -43,10 +44,10 @@ public abstract class Basic implements Serializable {
     @PrePersist
     protected void onCreate() {
         if (createdDate == null) {
-            createdDate = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+            createdDate = LocalDateTime.now();
         }
         if (modifiedDate == null) {
-            modifiedDate = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+            modifiedDate = LocalDateTime.now();
         }
         if (createdBy == null) {
             createdBy = "SYSTEM";
