@@ -14,7 +14,7 @@ import java.util.UUID;
 @Setter
 public class ListUserResponse implements Serializable {
 
-    private UUID id;
+    private String id;
 
     private String name;
 

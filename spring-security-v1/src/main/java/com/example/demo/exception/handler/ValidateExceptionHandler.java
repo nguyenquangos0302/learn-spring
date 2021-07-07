@@ -1,6 +1,9 @@
 package com.example.demo.exception.handler;
 
+import com.example.demo.constant.MessageConstant;
+import com.example.demo.payload.response.ObjectResult;
 import com.example.demo.payload.response.exception.ExceptionResponse;
+import com.example.demo.utils.TimeStampUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -9,7 +12,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,9 +19,8 @@ import java.util.Map;
 public class ValidateExceptionHandler {
 
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})
-    public ResponseEntity<Object> validateException(MethodArgumentNotValidException e, WebRequest webRequest) {
+    public ResponseEntity<ObjectResult<ExceptionResponse>> handlerValidateException(MethodArgumentNotValidException e, WebRequest webRequest) {
         // 1. Create payload containing exception details
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         Map<String, String> fieldErrors = new HashMap<>();
         e.getBindingResult().getAllErrors().forEach((error) -> {
@@ -32,14 +33,20 @@ public class ValidateExceptionHandler {
 
         ExceptionResponse exceptionResponse = ExceptionResponse
                                                                 .builder()
-                                                                .timestamp(timestamp.getTime())
-                                                                .statusCode(HttpStatus.BAD_REQUEST.value())
                                                                 .errors(fieldErrors)
-                                                                .path(path)
                                                                 .build();
 
+        ObjectResult<ExceptionResponse> objectResult = new ObjectResult<>();
+
+        objectResult.setTimestamp(TimeStampUtils.getTimeStamp());
+        objectResult.setStatus(HttpStatus.BAD_REQUEST);
+        objectResult.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        objectResult.setMessage(MessageConstant.VALIDATE_ERROR);
+        objectResult.setObject(exceptionResponse);
+        objectResult.setPath(path);
+
         // 2. Return response entity
-        return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<ObjectResult<ExceptionResponse>>(objectResult, HttpStatus.BAD_REQUEST);
     }
 
 }

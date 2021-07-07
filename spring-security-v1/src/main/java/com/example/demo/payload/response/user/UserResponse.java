@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,7 +15,7 @@ import java.util.UUID;
 @Setter
 public class UserResponse {
 
-    private UUID id;
+    private String id;
 
     private String name;
 

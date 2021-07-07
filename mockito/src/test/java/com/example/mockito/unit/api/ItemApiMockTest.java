@@ -14,6 +14,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.Arrays;
+
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -60,5 +62,22 @@ public class ItemApiMockTest {
 
     }
 
+    @Test
+    public void retrieveAllItems() throws Exception {
+        // call GET "hello-world" application/json
+
+        when(itemBusinessService.retrievAllItem()).thenReturn(
+                Arrays.asList( new Item(2, "Item 2", 10, 10), new Item(3, "Item 3", 10, 10))
+        );
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .get("/all-item")
+                .accept(MediaType.APPLICATION_JSON);
+        MvcResult result = mockMvc.perform(requestBuilder)
+                .andExpect(status().is(200))
+                .andExpect(content().json("[{\"id\":2,\"name\":\"Item 2\",\"price\":10,\"quantity\":10}, {\"id\":3,\"name\":\"Item 3\",\"price\":10,\"quantity\":10}]"))
+                .andReturn();
+
+    }
 
 }

@@ -21,7 +21,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class Base implements Serializable {
+public abstract class Base {
 
     @Id
     @GeneratedValue(generator = "uuid2")

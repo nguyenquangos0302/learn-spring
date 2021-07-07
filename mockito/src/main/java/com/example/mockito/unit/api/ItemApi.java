@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 public class ItemApi {
@@ -21,6 +23,15 @@ public class ItemApi {
     @GetMapping("/item-from-business-service")
     public Item itemFromBusinessService() {
         return itemBusinessService.retrevueHardCodedItem();
+    }
+
+    @GetMapping("/all-item")
+    public List<Item> retrieveAllItem() {
+        List<Item> list = itemBusinessService.retrievAllItem();
+        list.forEach(data -> {
+            data.setValue(data.getPrice() * data.getQuantity());
+        });
+        return list;
     }
 
 }
